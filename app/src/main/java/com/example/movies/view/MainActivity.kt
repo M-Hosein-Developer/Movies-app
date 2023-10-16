@@ -1,39 +1,74 @@
 package com.example.movies.view
 
-import android.graphics.Color
-import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
+import android.util.Log
 import android.view.View
-import androidx.lifecycle.ReportFragment.Companion.reportFragment
+import androidx.activity.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.movies.R
-import com.example.movies.R.color.black
 import com.example.movies.databinding.ActivityMainBinding
+import com.example.movies.model.Repository
+import com.example.movies.model.apiService.ApiService
+import com.example.movies.model.room.MoviesList
+import com.example.movies.viewModel.MainViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.coroutines.Delay
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
+
+    val viewModel : MainViewModel by viewModels()
+
+    @Inject
+    lateinit var apiService: ApiService
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+//        lifecycleScope.launch {
+//            viewModel.getAllData(Repository(apiService)).enqueue(object : Callback<MoviesList>{
+//                override fun onResponse(
+//                    call: Call<MoviesList>,
+//                    response: Response<MoviesList>
+//                ) {
+//
+//                    val a = response.body()
+//                    Log.v("testDAta" , a.toString())
+//
+//                }
+//
+//                override fun onFailure(call: Call<MoviesList>, t: Throwable) {
+//                    Log.v("testDAta" , t.message!!)
+//                }
+//
+//            })
+//        }
+
+
 
         bottomNavigation()
         setToolbar()
 
-        Handler(Looper.getMainLooper()).postDelayed({
+        lifecycleScope.launch{
+            delay(4000)
             binding.bottomNavigation.visibility = View.VISIBLE
             binding.toolbarMain.visibility = View.VISIBLE
             binding.appbarLayout.visibility = View.VISIBLE
-        } , 3000)
+        }
 
     }
 
@@ -49,7 +84,11 @@ class MainActivity : AppCompatActivity() {
 
         binding.bottomNavigation.setOnItemSelectedListener {
 
+            val navController = this.findNavController(R.id.fragmentContainerView)
 
+            val navView: BottomNavigationView = binding.bottomNavigation
+
+            navView.setupWithNavController(navController)
 
             when(it.itemId){
 

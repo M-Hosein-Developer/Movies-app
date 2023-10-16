@@ -31,7 +31,7 @@
         tools:layout="@layout/fragment_favorite" />
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.movies.view.HomeFragment"
+        android:name="com.example.movies.view.homeFrag.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment

@@ -11,9 +11,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.movies.R
 import com.example.movies.databinding.FragmentSplashBinding
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 
 class SplashFragment : DialogFragment() {
@@ -28,10 +31,11 @@ class SplashFragment : DialogFragment() {
         binding = FragmentSplashBinding.inflate(layoutInflater, container, false)
         // Inflate the layout for this fragment
 
-        Handler(Looper.getMainLooper()).postDelayed({
-            findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
 
-        }, 3000)
+        lifecycleScope.launch {
+            delay(4000)
+            findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
+        }
 
         return binding.root
     }
