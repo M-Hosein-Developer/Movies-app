@@ -21,7 +21,7 @@
         tools:layout="@layout/fragment_download" />
     <fragment
         android:id="@+id/exploreFragment"
-        android:name="com.example.movies.view.ExploreFragment"
+        android:name="com.example.movies.view.exploreFrag.ExploreFragment"
         android:label="fragment_explore"
         tools:layout="@layout/fragment_explore" />
     <fragment

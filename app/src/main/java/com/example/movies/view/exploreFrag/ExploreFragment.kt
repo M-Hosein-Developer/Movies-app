@@ -1,4 +1,4 @@
-package com.example.movies.view
+package com.example.movies.view.exploreFrag
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
