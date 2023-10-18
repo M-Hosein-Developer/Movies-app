@@ -11,9 +11,10 @@
     android:background="#00FFFFFF">
 
     <ImageView
+        android:id="@+id/imgCover"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/imgCover"
-        android:background="#00FFFFFF"/>
+        android:background="#00FFFFFF"
+        android:scaleType="centerCrop" />
 
 </androidx.cardview.widget.CardView>

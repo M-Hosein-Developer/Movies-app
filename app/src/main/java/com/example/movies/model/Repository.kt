@@ -1,6 +1,5 @@
 package com.example.movies.model
 
-import androidx.lifecycle.LiveData
 import com.example.movies.model.apiService.ApiService
 import com.example.movies.model.room.MoviesList
 import retrofit2.Call
@@ -13,10 +12,30 @@ class Repository@Inject constructor(private val apiService: ApiService) {
 //        moviesDao.insertAll(apiService.getAllNowPlay())
 //    }
 
-    fun getAllData() : Call<MoviesList> {
+    suspend fun getAllNowPlay() : MoviesList {
 //        return moviesDao.getAllData()
 
         return apiService.getAllNowPlay()
+    }
+
+    suspend fun getAllPopular() : MoviesList {
+
+        return apiService.getAllPopular()
+    }
+
+    suspend fun getAllTopRate() : MoviesList {
+
+        return apiService.getAllTopRate()
+    }
+
+    suspend fun getAllUpcoming() : MoviesList {
+
+        return apiService.getAllUpcoming()
+    }
+
+    suspend fun getAllTrend() : MoviesList {
+
+        return apiService.getAllTrend()
     }
 
 }

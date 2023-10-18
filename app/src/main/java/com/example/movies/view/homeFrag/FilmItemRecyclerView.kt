@@ -5,25 +5,30 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.RequestManager
 import com.example.movies.databinding.FilmItemRecBinding
-import com.example.movies.model.room.MoviesList
-import javax.inject.Inject
+import com.example.movies.model.room.Result
 
 
-class FilmItemRecyclerView(private val data : ArrayList<MoviesList>) : RecyclerView.Adapter<FilmItemRecyclerView.FilmItemRecyclerViewHolder>() {
+class FilmItemRecyclerView(private val data: List<Result> , val itemEvent : ItemEvent) : RecyclerView.Adapter<FilmItemRecyclerView.FilmItemRecyclerViewHolder>() {
 
     lateinit var binding: FilmItemRecBinding
 
 
     inner class FilmItemRecyclerViewHolder(view : View) : RecyclerView.ViewHolder(view){
 
-        fun bindView(moviesList: MoviesList) {
+        fun bindView(moviesList: Result) {
 
 
             Glide.with(itemView)
-                .load("https://www.themoviedb.org/t/p/w600_and_h900_bestv2/bAZFkReuav0fyCVmWXBeUB93nAe.jpg")
+                .load("https://image.tmdb.org/t/p/w500" + data!![adapterPosition].posterPath)
                 .into(binding.imgCover)
+
+
+            itemView.setOnClickListener {
+
+                itemEvent.onItemClick(data , adapterPosition)
+
+            }
 
         }
 
@@ -36,11 +41,16 @@ class FilmItemRecyclerView(private val data : ArrayList<MoviesList>) : RecyclerV
     }
 
     override fun getItemCount(): Int {
-        return data.size
+        return data!!.size
     }
 
     override fun onBindViewHolder(holder: FilmItemRecyclerViewHolder, position: Int) {
-        holder.bindView(data[position])
+        holder.bindView(data!![position])
+    }
+
+
+    interface ItemEvent {
+        fun onItemClick(result: List<Result> , position: Int)
     }
 
 

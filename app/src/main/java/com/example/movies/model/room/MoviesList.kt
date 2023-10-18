@@ -1,7 +1,6 @@
 package com.example.movies.model.room
 
 
-import androidx.room.Entity
 import com.google.gson.annotations.SerializedName
 
 data class MoviesList(

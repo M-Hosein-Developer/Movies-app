@@ -2,17 +2,26 @@ package com.example.movies.view.homeFrag
 
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewDebug.IntToString
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestManager
 import com.example.movies.databinding.TrendItemRecBinding
-import com.example.movies.model.room.MoviesList
+import com.example.movies.model.room.Result
+import javax.inject.Inject
 
-class TrendRecyclerView(private val data : ArrayList<MoviesList>) : RecyclerView.Adapter<TrendRecyclerView.TrendRecyclerViewHolder>() {
+class TrendRecyclerView(private val data: List<Result>) : RecyclerView.Adapter<TrendRecyclerView.TrendRecyclerViewHolder>() {
 
     lateinit var binding : TrendItemRecBinding
 
+
     inner class TrendRecyclerViewHolder(view : View) : RecyclerView.ViewHolder(view){
-        fun bindView(moviesList: MoviesList) {
+        fun bindView(moviesList: Result) {
+
+            Glide.with(itemView)
+                .load("https://image.tmdb.org/t/p/w500" + data!![adapterPosition].posterPath)
+                .into(binding.imgCover)
 
         }
 

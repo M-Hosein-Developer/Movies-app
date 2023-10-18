@@ -26,6 +26,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:visibility="gone"
         app:endIconDrawable="@drawable/search"
         app:endIconMode="custom"
         app:layout_constraintEnd_toEndOf="parent"
@@ -45,17 +46,18 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerTrend"
+        android:layout_width="0dp"
+        android:layout_height="240dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
         android:orientation="horizontal"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:layout_width="0dp"
-        android:layout_height="250dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        tools:listitem="@layout/trend_item_rec"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
+        tools:listitem="@layout/trend_item_rec">
 
     </androidx.recyclerview.widget.RecyclerView>
 
@@ -80,7 +82,7 @@
 
             <Button
 
-                android:id="@+id/button"
+                android:id="@+id/btnNowPlaying"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -91,18 +93,18 @@
                 android:textSize="12sp" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/btnPopular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:backgroundTint="#00FFFFFF"
                 android:gravity="center"
-                android:text="Upcoming"
+                android:text="Popular"
                 android:textColor="?attr/colorOnSecondary"
                 android:textSize="12sp" />
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/btnTopRate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -113,13 +115,13 @@
                 android:textSize="12sp" />
 
             <Button
-                android:id="@+id/button4"
+                android:id="@+id/btnUpcoming"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:backgroundTint="#00FFFFFF"
                 android:gravity="center"
-                android:text="Popular"
+                android:text="Upcoming"
                 android:textColor="?attr/colorOnSecondary"
                 android:textSize="12sp" />
         </LinearLayout>
