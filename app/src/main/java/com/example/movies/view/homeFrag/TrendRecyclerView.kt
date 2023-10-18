@@ -11,7 +11,7 @@ import com.example.movies.databinding.TrendItemRecBinding
 import com.example.movies.model.room.Result
 import javax.inject.Inject
 
-class TrendRecyclerView(private val data: List<Result>) : RecyclerView.Adapter<TrendRecyclerView.TrendRecyclerViewHolder>() {
+class TrendRecyclerView(private val data: List<Result> , private val itemEvent : EventItem) : RecyclerView.Adapter<TrendRecyclerView.TrendRecyclerViewHolder>() {
 
     lateinit var binding : TrendItemRecBinding
 
@@ -22,6 +22,12 @@ class TrendRecyclerView(private val data: List<Result>) : RecyclerView.Adapter<T
             Glide.with(itemView)
                 .load("https://image.tmdb.org/t/p/w500" + data!![adapterPosition].posterPath)
                 .into(binding.imgCover)
+
+            itemView.setOnClickListener {
+
+                itemEvent.onItemClickTrend(data , adapterPosition)
+
+            }
 
         }
 
@@ -39,6 +45,12 @@ class TrendRecyclerView(private val data: List<Result>) : RecyclerView.Adapter<T
 
     override fun onBindViewHolder(holder: TrendRecyclerViewHolder, position: Int) {
         holder.bindView(data[position])
+    }
+
+    interface EventItem {
+
+        fun onItemClickTrend(result : List<Result> , position: Int)
+
     }
 
 }

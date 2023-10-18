@@ -163,5 +163,16 @@
             android:textColor="?attr/colorOnSecondary" />
     </LinearLayout>
 
+    <ImageView
+        android:id="@+id/btnBookmarke"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:src="@drawable/baseline_bookmark_border_24"
+        app:layout_constraintBottom_toBottomOf="@+id/txtTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.87"
+        app:layout_constraintStart_toEndOf="@+id/txtTitle"
+        app:layout_constraintTop_toTopOf="@+id/txtTitle" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

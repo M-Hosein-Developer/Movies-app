@@ -22,7 +22,7 @@ import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() , FilmItemRecyclerView.ItemEvent {
+class HomeFragment : Fragment() , FilmItemRecyclerView.ItemEvent , TrendRecyclerView.EventItem{
 
 
 
@@ -59,7 +59,7 @@ class HomeFragment : Fragment() , FilmItemRecyclerView.ItemEvent {
 
                 val trend = viewModel.getAllTrend(Repository(apiService)).results
 
-                adapterTrending = TrendRecyclerView(trend)
+                adapterTrending = TrendRecyclerView(trend , this@HomeFragment)
                 binding.recyclerTrend.adapter = adapterTrending
 
             }
@@ -185,13 +185,19 @@ class HomeFragment : Fragment() , FilmItemRecyclerView.ItemEvent {
 
     override fun onItemClick(result: List<Result>, position: Int) {
 
-//        val intent = Intent(context , DetailFragment::class.java)
-//        intent.putExtra("background" , result[position].backdropPath)
-//        intent.putExtra("poster" , result[position].posterPath)
-//        intent.putExtra("title" , result[position].title)
-//        intent.putExtra("date" , result[position].releaseDate)
-//        intent.putExtra("about" , result[position].overview)
-//        startActivity(intent)
+        val bundle = Bundle()
+        bundle.putString("background", result[position].backdropPath)
+        bundle.putString("poster", result[position].posterPath)
+        bundle.putString("title", result[position].title)
+        bundle.putString("date", result[position].releaseDate)
+        bundle.putString("about", result[position].overview)
+
+        findNavController().navigate(com.example.movies.R.id.action_homeFragment_to_detailFragment , bundle)
+
+
+    }
+
+    override fun onItemClickTrend(result: List<Result>, position: Int) {
 
         val bundle = Bundle()
         bundle.putString("background", result[position].backdropPath)
