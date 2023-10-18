@@ -38,4 +38,9 @@ class Repository@Inject constructor(private val apiService: ApiService) {
         return apiService.getAllTrend()
     }
 
+    suspend fun getAllExplore() : MoviesList {
+
+        return apiService.getAllExplore()
+    }
+
 }

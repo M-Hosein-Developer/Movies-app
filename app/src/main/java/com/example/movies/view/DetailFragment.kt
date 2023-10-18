@@ -8,15 +8,25 @@ import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.example.movies.R
-import com.example.movies.databinding.FilmItemRecBinding
 import com.example.movies.databinding.FragmentDetailBinding
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class DetailFragment : Fragment() {
 
     lateinit var binding: FragmentDetailBinding
 
 
+    lateinit var background : String
+    lateinit var poster : String
+    lateinit var title : String
+    lateinit var date : String
+    lateinit var about : String
+
+
+    @Inject
+    lateinit var glide : RequestManager
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentDetailBinding.inflate(layoutInflater , container, false)
@@ -30,28 +40,38 @@ class DetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        val background = arguments?.getString("background")
-        val poster = arguments?.getString("poster")
-        val title = arguments?.getString("title")
-        val date = arguments?.getString("date")
-        val about = arguments?.getString("about")
+        initComponent()
+        bookMarkBtn()
 
 
-        Glide.with(requireActivity())
-            .load("https://image.tmdb.org/t/p/w500" + background)
+        
+    }
+
+    private fun bookMarkBtn() {
+
+
+    }
+
+    private fun initComponent() {
+
+        background = arguments?.getString("background").toString()
+        poster = arguments?.getString("poster").toString()
+        title = arguments?.getString("title").toString()
+        date = arguments?.getString("date").toString()
+        about = arguments?.getString("about").toString()
+
+
+        glide.load("https://image.tmdb.org/t/p/w500" + background)
             .into(binding.imgCoverDetail)
 
 
-        Glide.with(requireActivity())
-            .load("https://image.tmdb.org/t/p/w500" + poster)
+        glide.load("https://image.tmdb.org/t/p/w500" + poster)
             .into(binding.imgPosterDetail)
 
 
         binding.txtTitle.text = title
         binding.txtDateDetail.text = date
         binding.txtAbout.text = about
-
-
 
     }
 

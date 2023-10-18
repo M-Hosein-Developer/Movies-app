@@ -45,6 +45,7 @@ class SplashFragment : DialogFragment() {
 
         binding.animeLottie.playAnimation()
 
+
     }
 
 

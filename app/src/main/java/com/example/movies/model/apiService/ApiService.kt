@@ -28,4 +28,8 @@ interface ApiService {
     @GET("3/trending/all/day?language=en-US")
     suspend fun getAllTrend() : MoviesList
 
+    @Headers(API_KEY)
+    @GET("3/trending/all/day?language=en-US")
+    suspend fun getAllExplore() : MoviesList
+
 }

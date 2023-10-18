@@ -1,5 +1,6 @@
 package com.example.movies.viewModel
 
+import android.text.method.MovementMethod
 import androidx.lifecycle.ViewModel
 import com.example.movies.model.Repository
 import com.example.movies.model.room.MoviesList
@@ -29,6 +30,10 @@ class MainViewModel @Inject constructor(private val repository: Repository) : Vi
 
     suspend fun getAllTrend(repository: Repository) : MoviesList {
         return repository.getAllTrend()
+    }
+
+    suspend fun getAllExplore(repository: Repository) : MoviesList {
+        return repository.getAllExplore()
     }
 
 }
