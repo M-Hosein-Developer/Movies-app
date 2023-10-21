@@ -47,6 +47,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerTrend"
         android:layout_width="0dp"
+        android:layoutAnimation="@anim/recycler"
         android:layout_height="240dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="12dp"
@@ -60,6 +61,17 @@
         tools:listitem="@layout/trend_item_rec">
 
     </androidx.recyclerview.widget.RecyclerView>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/loading"
+        app:lottie_loop="true"
+        app:layout_constraintBottom_toBottomOf="@+id/recyclerTrend"
+        app:layout_constraintEnd_toEndOf="@+id/recyclerTrend"
+        app:layout_constraintStart_toStartOf="@+id/recyclerTrend"
+        app:layout_constraintTop_toTopOf="@+id/recyclerTrend"
+        app:lottie_rawRes="@raw/loading" />
 
     <HorizontalScrollView
         android:id="@+id/horizontalScrollView"
@@ -129,6 +141,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/filmRecycler"
+        android:layoutAnimation="@anim/recycler"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
@@ -141,6 +154,17 @@
         app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView"
         app:spanCount="3"
         tools:listitem="@layout/film_item_rec" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/loading1"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toBottomOf="@+id/filmRecycler"
+        app:layout_constraintEnd_toEndOf="@+id/filmRecycler"
+        app:layout_constraintStart_toStartOf="@+id/filmRecycler"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/loading" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

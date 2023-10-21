@@ -2,16 +2,13 @@ package com.example.movies.view.homeFrag
 
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewDebug.IntToString
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.RequestManager
 import com.example.movies.databinding.TrendItemRecBinding
-import com.example.movies.model.room.Result
-import javax.inject.Inject
+import com.example.movies.model.Result
 
-class TrendRecyclerView(private val data: List<Result> , private val itemEvent : EventItem) : RecyclerView.Adapter<TrendRecyclerView.TrendRecyclerViewHolder>() {
+class TrendRecyclerView(private val data: List<Result>, private val itemEvent : EventItem) : RecyclerView.Adapter<TrendRecyclerView.TrendRecyclerViewHolder>() {
 
     lateinit var binding : TrendItemRecBinding
 
@@ -49,7 +46,7 @@ class TrendRecyclerView(private val data: List<Result> , private val itemEvent :
 
     interface EventItem {
 
-        fun onItemClickTrend(result : List<Result> , position: Int)
+        fun onItemClickTrend(result : List<Result>, position: Int)
 
     }
 

@@ -6,10 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.movies.databinding.FilmItemRecBinding
-import com.example.movies.model.room.Result
+import com.example.movies.model.Result
 
 
-class FilmItemRecyclerView(private val data: List<Result> , val itemEvent : ItemEvent) : RecyclerView.Adapter<FilmItemRecyclerView.FilmItemRecyclerViewHolder>() {
+class FilmItemRecyclerView(private val data: List<Result>, val itemEvent : ItemEvent) : RecyclerView.Adapter<FilmItemRecyclerView.FilmItemRecyclerViewHolder>() {
 
     lateinit var binding: FilmItemRecBinding
 
@@ -50,7 +50,7 @@ class FilmItemRecyclerView(private val data: List<Result> , val itemEvent : Item
 
 
     interface ItemEvent {
-        fun onItemClick(result: List<Result> , position: Int)
+        fun onItemClick(result: List<Result>, position: Int)
     }
 
 

@@ -1,6 +1,7 @@
 package com.example.movies.view.homeFrag
 
 import android.graphics.Color
+import android.opengl.Visibility
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +15,8 @@ import androidx.navigation.fragment.findNavController
 import com.example.movies.databinding.FragmentHomeBinding
 import com.example.movies.model.Repository
 import com.example.movies.model.apiService.ApiService
-import com.example.movies.model.room.Result
+import com.example.movies.model.room.Dao
+import com.example.movies.model.Result
 import com.example.movies.viewModel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -28,6 +30,7 @@ class HomeFragment : Fragment() , FilmItemRecyclerView.ItemEvent , TrendRecycler
 
     @Inject
     lateinit var apiService: ApiService
+
 
     lateinit var binding: FragmentHomeBinding
     lateinit var viewModel: MainViewModel
@@ -49,6 +52,9 @@ class HomeFragment : Fragment() , FilmItemRecyclerView.ItemEvent , TrendRecycler
         firstRunMovies()
         trendMovies()
 
+        binding.loading.playAnimation()
+        binding.loading1.playAnimation()
+
     }
 
     private fun trendMovies() {
@@ -61,6 +67,7 @@ class HomeFragment : Fragment() , FilmItemRecyclerView.ItemEvent , TrendRecycler
 
                 adapterTrending = TrendRecyclerView(trend , this@HomeFragment)
                 binding.recyclerTrend.adapter = adapterTrending
+                binding.loading.visibility = View.GONE
 
             }
 
@@ -121,6 +128,7 @@ class HomeFragment : Fragment() , FilmItemRecyclerView.ItemEvent , TrendRecycler
 
                 adapter = FilmItemRecyclerView(upcoming , this@HomeFragment)
                 binding.filmRecycler.adapter = adapter
+                binding.loading1.visibility = View.GONE
 
             }
 
@@ -138,6 +146,7 @@ class HomeFragment : Fragment() , FilmItemRecyclerView.ItemEvent , TrendRecycler
 
                 adapter = FilmItemRecyclerView(topRate , this@HomeFragment)
                 binding.filmRecycler.adapter = adapter
+                binding.loading1.visibility = View.GONE
             }
 
         }
@@ -155,6 +164,7 @@ class HomeFragment : Fragment() , FilmItemRecyclerView.ItemEvent , TrendRecycler
 
                 adapter = FilmItemRecyclerView(popular , this@HomeFragment)
                 binding.filmRecycler.adapter = adapter
+                binding.loading1.visibility = View.GONE
 
             }
 
@@ -174,6 +184,7 @@ class HomeFragment : Fragment() , FilmItemRecyclerView.ItemEvent , TrendRecycler
 
                 adapter = FilmItemRecyclerView(nowPlaying , this@HomeFragment)
                 binding.filmRecycler.adapter = adapter
+                binding.loading1.visibility = View.GONE
 
             }
 

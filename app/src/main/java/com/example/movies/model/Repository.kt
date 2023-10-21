@@ -1,15 +1,16 @@
 package com.example.movies.model
 
 import com.example.movies.model.apiService.ApiService
-import com.example.movies.model.room.MoviesList
-import retrofit2.Call
+import com.example.movies.model.room.Dao
+import com.example.movies.model.room.Results
 import javax.inject.Inject
 
 class Repository@Inject constructor(private val apiService: ApiService) {
 
 
+
 //    suspend fun refreshData(){
-//        moviesDao.insertAll(apiService.getAllNowPlay())
+//        moviesDao.insertAllDAta(apiService.getAllNowPlay())
 //    }
 
     suspend fun getAllNowPlay() : MoviesList {

@@ -8,7 +8,7 @@ plugins {
 
 android {
     namespace = "com.example.movies"
-    compileSdk = 33
+    compileSdk = 34
 
     buildFeatures{
         viewBinding = true
@@ -17,7 +17,7 @@ android {
     defaultConfig {
         applicationId = "com.example.movies"
         minSdk = 24
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -69,9 +69,11 @@ dependencies {
     annotationProcessor("com.github.bumptech.glide:compiler:4.14.2")
 
     //Room
-    val room_version = "2.4.1"
+    val room_version = "2.6.0"
     implementation ("androidx.room:room-runtime:$room_version")
     kapt("androidx.room:room-compiler:$room_version")
+    implementation("androidx.room:room-ktx:$room_version")
+    implementation("androidx.room:room-guava:$room_version")
 
     //Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
@@ -82,6 +84,7 @@ dependencies {
 
     //View Model
     implementation("androidx.activity:activity-ktx:1.7.2")
+
 
 
 }

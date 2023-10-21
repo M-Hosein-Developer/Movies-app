@@ -1,8 +1,7 @@
 package com.example.movies.model.apiService
 
 import API_KEY
-import com.example.movies.model.room.MoviesList
-import retrofit2.Call
+import com.example.movies.model.MoviesList
 import retrofit2.http.GET
 import retrofit2.http.Headers
 

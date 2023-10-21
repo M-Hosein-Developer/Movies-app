@@ -18,18 +18,22 @@ class DetailFragment : Fragment() {
     lateinit var binding: FragmentDetailBinding
 
 
-    lateinit var background : String
-    lateinit var poster : String
-    lateinit var title : String
-    lateinit var date : String
-    lateinit var about : String
+    lateinit var background: String
+    lateinit var poster: String
+    lateinit var title: String
+    lateinit var date: String
+    lateinit var about: String
 
 
     @Inject
-    lateinit var glide : RequestManager
+    lateinit var glide: RequestManager
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = FragmentDetailBinding.inflate(layoutInflater , container, false)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentDetailBinding.inflate(layoutInflater, container, false)
 
         // Inflate the layout for this fragment
         return binding.root
@@ -44,11 +48,24 @@ class DetailFragment : Fragment() {
         bookMarkBtn()
 
 
-        
     }
 
     private fun bookMarkBtn() {
 
+        var bookMark: Boolean = false
+
+        binding.btnBookmarke.setOnClickListener {
+
+            if (bookMark == false) {
+
+                binding.btnBookmarke.setImageResource(R.drawable.baseline_bookmark_border_24)
+                bookMark = true
+            } else {
+                binding.btnBookmarke.setImageResource(R.drawable.baseline_bookmark_24)
+                bookMark = false
+            }
+
+        }
 
     }
 

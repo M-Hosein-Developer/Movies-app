@@ -6,11 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.movies.databinding.ExploreItemRecBinding
-import com.example.movies.model.room.Result
-import dagger.hilt.android.AndroidEntryPoint
+import com.example.movies.model.Result
 
 
-class ExploreAdapter(private val data : List<Result> , private val itemEventExplore: ItemEventExplore) : RecyclerView.Adapter<ExploreAdapter.ExploreAdapterHolder>() {
+class ExploreAdapter(private val data : List<Result>, private val itemEventExplore: ItemEventExplore) : RecyclerView.Adapter<ExploreAdapter.ExploreAdapterHolder>() {
 
     lateinit var binding : ExploreItemRecBinding
 
@@ -50,6 +49,6 @@ class ExploreAdapter(private val data : List<Result> , private val itemEventExpl
 
     interface ItemEventExplore{
 
-        fun onItemClicked(result: List<Result> , position: Int)
+        fun onItemClicked(result: List<Result>, position: Int)
     }
 }

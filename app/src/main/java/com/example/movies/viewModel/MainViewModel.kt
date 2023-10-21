@@ -3,7 +3,7 @@ package com.example.movies.viewModel
 import android.text.method.MovementMethod
 import androidx.lifecycle.ViewModel
 import com.example.movies.model.Repository
-import com.example.movies.model.room.MoviesList
+import com.example.movies.model.MoviesList
 import dagger.hilt.android.lifecycle.HiltViewModel
 import retrofit2.Call
 import javax.inject.Inject

@@ -1,7 +1,8 @@
-package com.example.movies.model.room
+package com.example.movies.model
 
 
 import com.google.gson.annotations.SerializedName
+
 
 data class MoviesList(
     @SerializedName("page")
