@@ -1,4 +1,4 @@
-package com.example.movies.view.homeFrag
+package com.example.movies.view.homeFrag.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,17 +6,17 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.movies.databinding.FilmItemRecBinding
-import com.example.movies.model.Result
+import com.example.movies.model.dataClasses.TopRatedEntity
 
 
-class FilmItemRecyclerView(private val data: List<Result>, val itemEvent : ItemEvent) : RecyclerView.Adapter<FilmItemRecyclerView.FilmItemRecyclerViewHolder>() {
+class TopRatedRecyclerView(private val data: List<TopRatedEntity>?, val itemEvent: ItemEvent) : RecyclerView.Adapter<TopRatedRecyclerView.FilmItemRecyclerViewHolder>() {
 
     lateinit var binding: FilmItemRecBinding
 
 
     inner class FilmItemRecyclerViewHolder(view : View) : RecyclerView.ViewHolder(view){
 
-        fun bindView(moviesList: Result) {
+        fun bindView(moviesList: TopRatedEntity) {
 
 
             Glide.with(itemView)
@@ -26,7 +26,7 @@ class FilmItemRecyclerView(private val data: List<Result>, val itemEvent : ItemE
 
             itemView.setOnClickListener {
 
-                itemEvent.onItemClick(data , adapterPosition)
+                itemEvent.onItemClickTopRated(data , adapterPosition)
 
             }
 
@@ -50,7 +50,7 @@ class FilmItemRecyclerView(private val data: List<Result>, val itemEvent : ItemE
 
 
     interface ItemEvent {
-        fun onItemClick(result: List<Result>, position: Int)
+        fun onItemClickTopRated(result: List<TopRatedEntity>, position: Int)
     }
 
 

@@ -1,3 +1,14 @@
+package com.example.movies.utils
+
+const val NOWPLAYING_TABLE = "nowPlaying_table"
+const val POPULAR_TABLE = "popular_table"
+const val TOP_RATED = "top_rated"
+const val UPCOMING = "upcoming"
+const val TREND = "trend"
+
+
+
+const val MOVIES_DATABASE = "movies_database"
 
 const val BASE_URL = "https://api.themoviedb.org/"
 

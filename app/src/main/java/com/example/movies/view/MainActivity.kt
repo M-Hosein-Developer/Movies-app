@@ -3,22 +3,18 @@ package com.example.movies.view
 
 import android.os.Bundle
 import android.view.View
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.Navigation.findNavController
 import androidx.navigation.findNavController
-import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.movies.R
 import com.example.movies.databinding.ActivityMainBinding
-import com.example.movies.model.apiService.ApiService
-import com.example.movies.viewModel.MainViewModel
+import com.example.movies.utils.NetworkChecker
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 
 @AndroidEntryPoint
@@ -35,12 +31,27 @@ class MainActivity : AppCompatActivity() {
 
         bottomNavigation()
         setToolbar()
+        networkChecker()
+
+
+
+
+    }
+
+    private fun networkChecker() {
+
 
         lifecycleScope.launch{
             delay(4000)
             binding.bottomNavigation.visibility = View.VISIBLE
             binding.toolbarMain.visibility = View.VISIBLE
             binding.appbarLayout.visibility = View.VISIBLE
+        }
+
+        if (!NetworkChecker(this).internetConnection) {
+
+            Snackbar.make(binding.root, "Check Internet connection", 5000).show()
+
         }
 
     }
@@ -52,12 +63,12 @@ class MainActivity : AppCompatActivity() {
     private fun bottomNavigation() {
 
         binding.bottomNavigation.selectedItemId = R.id.homeFragment
-        binding.toolbarMain.title = "Home"
+        binding.toolbarMain.title = "Movies"
 
 
         val navController = this.findNavController(R.id.fragmentContainer)
         val navView: BottomNavigationView = binding.bottomNavigation
         navView.setupWithNavController(navController)
-
     }
+
 }

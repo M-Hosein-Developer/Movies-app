@@ -5,19 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.movies.R
 import com.example.movies.databinding.FragmentExploreBinding
-import com.example.movies.model.Repository
 import com.example.movies.model.apiService.ApiService
-import com.example.movies.model.room.Dao
-import com.example.movies.model.Result
+import com.example.movies.model.room.MoviesDao
+import com.example.movies.model.apiService.Result
 import com.example.movies.viewModel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -32,6 +29,9 @@ class ExploreFragment : Fragment() , ExploreAdapter.ItemEventExplore {
 
     @Inject
     lateinit var apiService: ApiService
+
+    @Inject
+    lateinit var roomDao : MoviesDao
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentExploreBinding.inflate(layoutInflater , container , false)
@@ -54,7 +54,7 @@ class ExploreFragment : Fragment() , ExploreAdapter.ItemEventExplore {
 
             lifecycle.repeatOnLifecycle(Lifecycle.State.CREATED) {
 
-                val data = viewModel.getAllExplore(Repository(apiService)).results
+                val data = viewModel.getAllExplore().results
 
                 adapter = ExploreAdapter(data , this@ExploreFragment)
                 binding.ExploreRecyclerview.adapter = adapter

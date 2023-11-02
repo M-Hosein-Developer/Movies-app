@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.example.movies.R
 import com.example.movies.databinding.FragmentDetailBinding
@@ -19,20 +18,16 @@ class DetailFragment : Fragment() {
 
 
     lateinit var background: String
-    lateinit var poster: String
+    private lateinit var poster: String
     lateinit var title: String
-    lateinit var date: String
-    lateinit var about: String
+    private lateinit var date: String
+    private lateinit var about: String
 
 
     @Inject
     lateinit var glide: RequestManager
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentDetailBinding.inflate(layoutInflater, container, false)
 
         // Inflate the layout for this fragment
@@ -52,7 +47,7 @@ class DetailFragment : Fragment() {
 
     private fun bookMarkBtn() {
 
-        var bookMark: Boolean = false
+        var bookMark = false
 
         binding.btnBookmarke.setOnClickListener {
 
@@ -78,11 +73,11 @@ class DetailFragment : Fragment() {
         about = arguments?.getString("about").toString()
 
 
-        glide.load("https://image.tmdb.org/t/p/w500" + background)
+        glide.load("https://image.tmdb.org/t/p/w500$background")
             .into(binding.imgCoverDetail)
 
 
-        glide.load("https://image.tmdb.org/t/p/w500" + poster)
+        glide.load("https://image.tmdb.org/t/p/w500$poster")
             .into(binding.imgPosterDetail)
 
 

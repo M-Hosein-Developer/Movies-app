@@ -1,8 +1,9 @@
 package com.example.movies.di.module
 
+import com.example.movies.utils.MOVIES_DATABASE
 import android.content.Context
 import androidx.room.Room
-import com.example.movies.model.room.Dao
+import com.example.movies.model.room.MoviesDao
 import com.example.movies.model.room.MyDatabase
 import dagger.Module
 import dagger.Provides
@@ -19,14 +20,17 @@ object DatabaseModule {
     @Provides
     @Singleton
     fun provideDatabase(@ApplicationContext context: Context) : MyDatabase{
-        return Room.databaseBuilder(context , MyDatabase::class.java , "database.db").build()
+        return Room.databaseBuilder(context , MyDatabase::class.java , MOVIES_DATABASE)
+            .allowMainThreadQueries()
+            .fallbackToDestructiveMigration()
+            .build()
     }
 
 
     @Provides
     @Singleton
-    fun provideDao(database: MyDatabase) : Dao{
-        return database.doa()
+    fun provideDao(database: MyDatabase) : MoviesDao{
+        return database.movieDao()
     }
 
 }

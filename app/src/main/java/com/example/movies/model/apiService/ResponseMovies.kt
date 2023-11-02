@@ -1,10 +1,7 @@
-package com.example.movies.model
-
-
+package com.example.movies.model.apiService
 import com.google.gson.annotations.SerializedName
 
-
-data class MoviesList(
+data class ResponseMovies(
     @SerializedName("page")
     val page: Int,
     @SerializedName("results")

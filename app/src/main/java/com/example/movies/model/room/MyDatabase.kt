@@ -2,10 +2,15 @@ package com.example.movies.model.room
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import com.example.movies.model.dataClasses.NowPlayingEntity
+import com.example.movies.model.dataClasses.PopularEntity
+import com.example.movies.model.dataClasses.TopRatedEntity
+import com.example.movies.model.dataClasses.TrendEntity
+import com.example.movies.model.dataClasses.UpcomingEntity
 
-//@Database(entities = [Results::class] , version = 1 , exportSchema = false)
+@Database(entities = [NowPlayingEntity::class , PopularEntity::class , TopRatedEntity::class , UpcomingEntity::class , TrendEntity::class] , version = 1 , exportSchema = false)
 abstract class MyDatabase : RoomDatabase() {
 
-    abstract fun doa() : Dao
+    abstract fun movieDao() : MoviesDao
 
 }

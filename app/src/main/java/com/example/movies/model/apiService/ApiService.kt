@@ -1,7 +1,6 @@
 package com.example.movies.model.apiService
 
-import API_KEY
-import com.example.movies.model.MoviesList
+import com.example.movies.utils.API_KEY
 import retrofit2.http.GET
 import retrofit2.http.Headers
 
@@ -9,26 +8,26 @@ interface ApiService {
 
     @Headers(API_KEY)
     @GET("3/movie/now_playing?language=en-US&page=1")
-    suspend fun getAllNowPlay() : MoviesList
+    suspend fun getAllNowPlay() : ResponseMovies
 
     @Headers(API_KEY)
     @GET("3/movie/popular?language=en-US&page=1")
-    suspend fun getAllPopular() : MoviesList
+    suspend fun getAllPopular() : ResponseMovies
 
     @Headers(API_KEY)
     @GET("3/movie/top_rated?language=en-US&page=1")
-    suspend fun getAllTopRate() : MoviesList
+    suspend fun getAllTopRate() : ResponseMovies
 
     @Headers(API_KEY)
     @GET("3/movie/upcoming?language=en-US&page=1")
-    suspend fun getAllUpcoming() : MoviesList
+    suspend fun getAllUpcoming() : ResponseMovies
 
     @Headers(API_KEY)
     @GET("3/trending/all/day?language=en-US")
-    suspend fun getAllTrend() : MoviesList
+    suspend fun getAllTrend() : ResponseMovies
 
     @Headers(API_KEY)
     @GET("3/trending/all/day?language=en-US")
-    suspend fun getAllExplore() : MoviesList
+    suspend fun getAllExplore() : ResponseMovies
 
 }

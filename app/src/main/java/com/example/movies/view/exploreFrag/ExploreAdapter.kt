@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.movies.databinding.ExploreItemRecBinding
-import com.example.movies.model.Result
+import com.example.movies.model.apiService.Result
 
 
 class ExploreAdapter(private val data : List<Result>, private val itemEventExplore: ItemEventExplore) : RecyclerView.Adapter<ExploreAdapter.ExploreAdapterHolder>() {

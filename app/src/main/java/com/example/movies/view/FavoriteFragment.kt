@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.movies.R
 
-// TODO: Rename parameter arguments, choose names that match
 class FavoriteFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

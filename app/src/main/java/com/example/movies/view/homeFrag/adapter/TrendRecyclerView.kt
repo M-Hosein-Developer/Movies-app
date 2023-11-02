@@ -1,4 +1,4 @@
-package com.example.movies.view.homeFrag
+package com.example.movies.view.homeFrag.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,15 +6,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.movies.databinding.TrendItemRecBinding
-import com.example.movies.model.Result
+import com.example.movies.model.dataClasses.TrendEntity
 
-class TrendRecyclerView(private val data: List<Result>, private val itemEvent : EventItem) : RecyclerView.Adapter<TrendRecyclerView.TrendRecyclerViewHolder>() {
+class TrendRecyclerView(private val data: List<TrendEntity>?, private val itemEvent : EventItem) : RecyclerView.Adapter<TrendRecyclerView.TrendRecyclerViewHolder>() {
 
     lateinit var binding : TrendItemRecBinding
 
 
     inner class TrendRecyclerViewHolder(view : View) : RecyclerView.ViewHolder(view){
-        fun bindView(moviesList: Result) {
+        fun bindView(moviesList: TrendEntity) {
 
             Glide.with(itemView)
                 .load("https://image.tmdb.org/t/p/w500" + data!![adapterPosition].posterPath)
@@ -37,16 +37,16 @@ class TrendRecyclerView(private val data: List<Result>, private val itemEvent : 
     }
 
     override fun getItemCount(): Int {
-        return data.size
+        return data!!.size
     }
 
     override fun onBindViewHolder(holder: TrendRecyclerViewHolder, position: Int) {
-        holder.bindView(data[position])
+        holder.bindView(data!![position])
     }
 
     interface EventItem {
 
-        fun onItemClickTrend(result : List<Result>, position: Int)
+        fun onItemClickTrend(result : List<TrendEntity>, position: Int)
 
     }
 
