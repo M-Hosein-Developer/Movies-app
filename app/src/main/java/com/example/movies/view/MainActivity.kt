@@ -22,6 +22,8 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
 
+//    private val authenticationViewModel : AuthenticationViewModel by viewModels()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,11 +31,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
+
+
         bottomNavigation()
         setToolbar()
         networkChecker()
-
-
 
 
     }
@@ -43,9 +45,9 @@ class MainActivity : AppCompatActivity() {
 
         lifecycleScope.launch{
             delay(4000)
-            binding.bottomNavigation.visibility = View.VISIBLE
-            binding.toolbarMain.visibility = View.VISIBLE
-            binding.appbarLayout.visibility = View.VISIBLE
+//            binding.bottomNavigation.visibility = View.VISIBLE
+//            binding.toolbarMain.visibility = View.VISIBLE
+//            binding.appbarLayout.visibility = View.VISIBLE
         }
 
         if (!NetworkChecker(this).internetConnection) {
@@ -69,6 +71,7 @@ class MainActivity : AppCompatActivity() {
         val navController = this.findNavController(R.id.fragmentContainer)
         val navView: BottomNavigationView = binding.bottomNavigation
         navView.setupWithNavController(navController)
+
     }
 
 }

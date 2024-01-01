@@ -11,7 +11,7 @@ import com.example.movies.model.dataClasses.UpcomingEntity
 import com.example.movies.model.room.MoviesDao
 import javax.inject.Inject
 
-class Repository @Inject constructor(private val apiService: ApiService, private val moviesDao: MoviesDao) {
+class MainRepository @Inject constructor(private val apiService: ApiService, private val moviesDao: MoviesDao) {
 
     //get data from db
 
@@ -105,7 +105,7 @@ class Repository @Inject constructor(private val apiService: ApiService, private
         return moviesDao.getAllTopRatedData()
     }
 
-    suspend fun getAllUpcoming(): List<UpcomingEntity> {
+     suspend fun getAllUpcoming(): List<UpcomingEntity> {
 
         val response = apiService.getAllUpcoming()
 

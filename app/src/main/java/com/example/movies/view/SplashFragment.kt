@@ -1,5 +1,7 @@
 package com.example.movies.view
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -21,13 +23,6 @@ class SplashFragment : DialogFragment() {
         binding = FragmentSplashBinding.inflate(layoutInflater, container, false)
         // Inflate the layout for this fragment
 
-        lifecycleScope.launch {
-            delay(4000)
-            findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
-            binding.animeLottie.playAnimation()
-        }
-
-
         return binding.root
     }
 
@@ -35,6 +30,28 @@ class SplashFragment : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.animeLottie.playAnimation()
+
+        val pref = requireActivity().getSharedPreferences("Successful SignIn", Context.MODE_PRIVATE)
+        val signIn = pref.getString("signIn" , "null")
+
+
+        if (signIn == "successful"){
+            lifecycleScope.launch {
+                delay(3000)
+                findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
+                binding.animeLottie.playAnimation()
+
+            }
+        }else{
+            lifecycleScope.launch {
+                delay(3000)
+                findNavController().navigate(R.id.action_splashFragment_to_introFragment)
+                binding.animeLottie.playAnimation()
+
+            }
+        }
+
+
     }
 
 

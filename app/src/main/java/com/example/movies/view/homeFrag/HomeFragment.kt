@@ -56,18 +56,12 @@ class HomeFragment : Fragment(), NowPlayingRecyclerView.ItemEvent, PopularRecycl
     lateinit var moviesDao: MoviesDao
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
         //InitViews
         firstRunMovies()
@@ -246,6 +240,7 @@ class HomeFragment : Fragment(), NowPlayingRecyclerView.ItemEvent, PopularRecycl
 
     }
 
+
     // Send data to detail fragment top recycler trend
     override fun onItemClickTrend(result: List<TrendEntity>, position: Int) {
 
@@ -310,6 +305,5 @@ class HomeFragment : Fragment(), NowPlayingRecyclerView.ItemEvent, PopularRecycl
         )
 
     }
-
 
 }
