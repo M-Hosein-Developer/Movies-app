@@ -3,6 +3,7 @@ package com.example.movies.model.apiService
 import com.example.movies.utils.API_KEY
 import retrofit2.http.GET
 import retrofit2.http.Headers
+import retrofit2.http.Path
 
 interface ApiService {
 
@@ -29,5 +30,9 @@ interface ApiService {
     @Headers(API_KEY)
     @GET("3/trending/all/day?language=en-US")
     suspend fun getAllExplore() : ResponseMovies
+
+    @Headers(API_KEY)
+    @GET("3/movie/{id}/videos?language=en-US")
+    suspend fun getTrailerById(@Path("id") id : Int) : TrailerResponse
 
 }

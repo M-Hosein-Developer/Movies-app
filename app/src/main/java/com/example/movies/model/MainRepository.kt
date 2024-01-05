@@ -3,6 +3,7 @@ package com.example.movies.model
 import android.util.Log
 import com.example.movies.model.apiService.ApiService
 import com.example.movies.model.apiService.ResponseMovies
+import com.example.movies.model.apiService.TrailerResponse
 import com.example.movies.model.dataClasses.NowPlayingEntity
 import com.example.movies.model.dataClasses.PopularEntity
 import com.example.movies.model.dataClasses.TopRatedEntity
@@ -172,10 +173,13 @@ class MainRepository @Inject constructor(private val apiService: ApiService, pri
     }
 
 
-
     suspend fun getAllExplore(): ResponseMovies {
 
         return apiService.getAllExplore()
+    }
+
+    suspend fun getTrailerById(id : Int) : List<TrailerResponse.MoviesResult> {
+        return apiService.getTrailerById(id).results
     }
 
 }

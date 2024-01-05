@@ -1,20 +1,28 @@
-package com.example.movies.view
+package com.example.movies.view.detailFrag
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.RequestManager
 import com.example.movies.R
 import com.example.movies.databinding.FragmentDetailBinding
+import com.example.movies.viewModel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class DetailFragment : Fragment() {
 
     lateinit var binding: FragmentDetailBinding
+    private val viewModel: MainViewModel by viewModels()
+    lateinit var adapter: VideoAdapter
 
 
     lateinit var background: String
@@ -43,7 +51,9 @@ class DetailFragment : Fragment() {
         bookMarkBtn()
 
 
+
     }
+
 
     private fun bookMarkBtn() {
 
@@ -51,13 +61,13 @@ class DetailFragment : Fragment() {
 
         binding.btnBookmarke.setOnClickListener {
 
-            if (bookMark == false) {
+            bookMark = if (!bookMark) {
 
                 binding.btnBookmarke.setImageResource(R.drawable.baseline_bookmark_border_24)
-                bookMark = true
+                true
             } else {
                 binding.btnBookmarke.setImageResource(R.drawable.baseline_bookmark_24)
-                bookMark = false
+                false
             }
 
         }
@@ -66,12 +76,15 @@ class DetailFragment : Fragment() {
 
     private fun initComponent() {
 
+        val id = arguments?.getInt("id")!!
         background = arguments?.getString("background").toString()
         poster = arguments?.getString("poster").toString()
         title = arguments?.getString("title").toString()
         date = arguments?.getString("date").toString()
         about = arguments?.getString("about").toString()
 
+
+        trailer(id)
 
         glide.load("https://image.tmdb.org/t/p/w500$background")
             .into(binding.imgCoverDetail)
@@ -84,6 +97,20 @@ class DetailFragment : Fragment() {
         binding.txtTitle.text = title
         binding.txtDateDetail.text = date
         binding.txtAbout.text = about
+
+    }
+
+    private fun trailer(id: Int) {
+
+        lifecycleScope.launch {
+
+            val data = viewModel.getTrailerById(id)
+
+            adapter = VideoAdapter(requireContext() , data)
+            binding.videoRecycler.adapter = adapter
+
+
+        }
 
     }
 

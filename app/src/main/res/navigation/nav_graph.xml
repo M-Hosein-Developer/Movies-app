@@ -52,7 +52,7 @@
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/detailFragment"
-        android:name="com.example.movies.view.DetailFragment"
+        android:name="com.example.movies.view.detailFrag.DetailFragment"
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail" >
         <action

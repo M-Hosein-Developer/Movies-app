@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.movies.model.MainRepository
 import com.example.movies.model.apiService.ResponseMovies
+import com.example.movies.model.apiService.TrailerResponse
 import com.example.movies.model.dataClasses.NowPlayingEntity
 import com.example.movies.model.dataClasses.PopularEntity
 import com.example.movies.model.dataClasses.TopRatedEntity
@@ -47,6 +48,7 @@ class MainViewModel @Inject constructor(private val mainRepository: MainReposito
         getAllTrend()
 
     }
+
 
     private fun getAllNowPlay() {
         viewModelScope.launch {
@@ -111,6 +113,10 @@ class MainViewModel @Inject constructor(private val mainRepository: MainReposito
 
     suspend fun getAllExplore(): ResponseMovies {
         return mainRepository.getAllExplore()
+    }
+
+    suspend fun getTrailerById(id: Int): List<TrailerResponse.MoviesResult> {
+        return mainRepository.getTrailerById(id)
     }
 
 }

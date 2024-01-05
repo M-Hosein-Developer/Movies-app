@@ -67,7 +67,6 @@ class HomeFragment : Fragment(), NowPlayingRecyclerView.ItemEvent, PopularRecycl
         firstRunMovies()
         trendMovies()
         loadingAnimation()
-
     }
 
     // Loading animation
@@ -226,6 +225,7 @@ class HomeFragment : Fragment(), NowPlayingRecyclerView.ItemEvent, PopularRecycl
     override fun onItemClick(result: List<NowPlayingEntity>, position: Int) {
 
         val bundle = Bundle()
+        bundle.putInt("id", result[position].id)
         bundle.putString("background", result[position].backdropPath)
         bundle.putString("poster", result[position].posterPath)
         bundle.putString("title", result[position].title)
@@ -245,6 +245,7 @@ class HomeFragment : Fragment(), NowPlayingRecyclerView.ItemEvent, PopularRecycl
     override fun onItemClickTrend(result: List<TrendEntity>, position: Int) {
 
         val bundle = Bundle()
+        bundle.putInt("id", result[position].id)
         bundle.putString("background", result[position].backdropPath)
         bundle.putString("poster", result[position].posterPath)
         bundle.putString("title", result[position].title)
@@ -261,6 +262,7 @@ class HomeFragment : Fragment(), NowPlayingRecyclerView.ItemEvent, PopularRecycl
     override fun onItemClickPopular(result: List<PopularEntity>, position: Int) {
 
         val bundle = Bundle()
+        bundle.putInt("id", result[position].id)
         bundle.putString("background", result[position].backdropPath)
         bundle.putString("poster", result[position].posterPath)
         bundle.putString("title", result[position].title)
@@ -277,6 +279,7 @@ class HomeFragment : Fragment(), NowPlayingRecyclerView.ItemEvent, PopularRecycl
     override fun onItemClickTopRated(result: List<TopRatedEntity>, position: Int) {
 
         val bundle = Bundle()
+        bundle.putInt("id", result[position].id)
         bundle.putString("background", result[position].backdropPath)
         bundle.putString("poster", result[position].posterPath)
         bundle.putString("title", result[position].title)
@@ -293,6 +296,7 @@ class HomeFragment : Fragment(), NowPlayingRecyclerView.ItemEvent, PopularRecycl
     override fun onItemClickUpcoming(result: List<UpcomingEntity>, position: Int) {
 
         val bundle = Bundle()
+        bundle.putInt("id", result[position].id)
         bundle.putString("background", result[position].backdropPath)
         bundle.putString("poster", result[position].posterPath)
         bundle.putString("title", result[position].title)
