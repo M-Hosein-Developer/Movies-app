@@ -23,8 +23,6 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
 
-//    private val authenticationViewModel : AuthenticationViewModel by viewModels()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,6 +61,7 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
+
             if (destination.id == R.id.homeFragment) {
 
                 binding.bottomNavigation.visibility = View.VISIBLE
@@ -70,6 +69,15 @@ class MainActivity : AppCompatActivity() {
                 binding.appbarLayout.visibility = View.VISIBLE
 
             }
+
+            if (destination.id == R.id.videoPlayerFragment || destination.id == R.id.detailFragment) {
+
+                binding.bottomNavigation.visibility = View.GONE
+                binding.toolbarMain.visibility = View.VISIBLE
+                binding.appbarLayout.visibility = View.VISIBLE
+
+            }
+
         }
     }
 

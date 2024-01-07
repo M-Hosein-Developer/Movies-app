@@ -1,6 +1,5 @@
 package com.example.movies.view.detailFrag
 
-import android.R
 import android.content.Context
 import android.support.annotation.NonNull
 import android.view.LayoutInflater
@@ -11,7 +10,9 @@ import com.example.movies.databinding.VideoItemRecBinding
 import com.example.movies.model.apiService.TrailerResponse
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.FullscreenListener
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.options.IFramePlayerOptions
+import kotlin.jvm.functions.Function0
 
 
 class VideoAdapter(private val context: Context, private val data : List<TrailerResponse.MoviesResult>) : RecyclerView.Adapter<VideoAdapter.VideoAdapterViewHolder>() {
@@ -29,7 +30,6 @@ class VideoAdapter(private val context: Context, private val data : List<Trailer
                     youTubePlayer.pause()
                 }
             })
-
         }
 
     }
@@ -40,7 +40,7 @@ class VideoAdapter(private val context: Context, private val data : List<Trailer
     }
 
     override fun getItemCount(): Int {
-        return 3
+        return 4
     }
 
     override fun onBindViewHolder(holder: VideoAdapterViewHolder, position: Int) {

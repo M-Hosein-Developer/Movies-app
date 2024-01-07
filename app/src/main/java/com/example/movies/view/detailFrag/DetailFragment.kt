@@ -1,5 +1,6 @@
 package com.example.movies.view.detailFrag
 
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -8,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.RequestManager
 import com.example.movies.R
@@ -21,9 +23,6 @@ import javax.inject.Inject
 class DetailFragment : Fragment() {
 
     lateinit var binding: FragmentDetailBinding
-    private val viewModel: MainViewModel by viewModels()
-    lateinit var adapter: VideoAdapter
-
 
     lateinit var background: String
     private lateinit var poster: String
@@ -46,6 +45,7 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
 
         initComponent()
         bookMarkBtn()
@@ -102,14 +102,11 @@ class DetailFragment : Fragment() {
 
     private fun trailer(id: Int) {
 
-        lifecycleScope.launch {
 
-            val data = viewModel.getTrailerById(id)
-
-            adapter = VideoAdapter(requireContext() , data)
-            binding.videoRecycler.adapter = adapter
-
-
+        binding.btnPlayVideo.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putInt("id", id)
+            findNavController().navigate(R.id.action_detailFragment_to_videoPlayerFragment , bundle)
         }
 
     }

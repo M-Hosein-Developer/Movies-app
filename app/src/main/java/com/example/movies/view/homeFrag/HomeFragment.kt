@@ -45,15 +45,7 @@ class HomeFragment : Fragment(), NowPlayingRecyclerView.ItemEvent, PopularRecycl
     private lateinit var upcomingAdapter: UpcomingRecyclerView
     private lateinit var adapterTrending: TrendRecyclerView
 
-
     private val viewModel: MainViewModel by viewModels()
-
-
-    @Inject
-    lateinit var apiService: ApiService
-
-    @Inject
-    lateinit var moviesDao: MoviesDao
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
