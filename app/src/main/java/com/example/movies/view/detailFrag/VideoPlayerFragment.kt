@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.movies.R
@@ -45,15 +46,25 @@ class VideoPlayerFragment : Fragment() {
 
     private fun videoPlayer() {
 
-        val id = arguments?.getInt("id")!!
+        val id = arguments?.getInt("id")
 
-        lifecycleScope.launch {
+        if (id == null){
 
-            val data = viewModel.getTrailerById(id)
-            adapter = VideoAdapter(requireContext() , data)
-            binding.videoRecycler.adapter = adapter
+            Toast.makeText(requireActivity(), id, Toast.LENGTH_SHORT).show()
+
+        }else{
+
+            lifecycleScope.launch {
+
+                val data = viewModel.getTrailerById(id)
+                adapter = VideoAdapter(requireContext() , data)
+                binding.videoRecycler.adapter = adapter
+
+            }
 
         }
+
+
 
     }
 

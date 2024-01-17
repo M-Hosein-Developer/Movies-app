@@ -8,18 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.movies.databinding.FragmentHomeBinding
-import com.example.movies.model.apiService.ApiService
 import com.example.movies.model.dataClasses.NowPlayingEntity
 import com.example.movies.model.dataClasses.PopularEntity
 import com.example.movies.model.dataClasses.TopRatedEntity
 import com.example.movies.model.dataClasses.TrendEntity
 import com.example.movies.model.dataClasses.UpcomingEntity
-import com.example.movies.model.room.MoviesDao
 import com.example.movies.view.homeFrag.adapter.NowPlayingRecyclerView
 import com.example.movies.view.homeFrag.adapter.PopularRecyclerView
 import com.example.movies.view.homeFrag.adapter.TopRatedRecyclerView
@@ -27,8 +22,6 @@ import com.example.movies.view.homeFrag.adapter.TrendRecyclerView
 import com.example.movies.view.homeFrag.adapter.UpcomingRecyclerView
 import com.example.movies.viewModel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 
 @AndroidEntryPoint
@@ -70,21 +63,13 @@ class HomeFragment : Fragment(), NowPlayingRecyclerView.ItemEvent, PopularRecycl
     // Trend Movies - Top of screen recycler View
     private fun trendMovies() {
 
-        lifecycleScope.launch {
+        viewModel.trendData.observe(viewLifecycleOwner) { movie ->
 
-            lifecycle.repeatOnLifecycle(Lifecycle.State.CREATED) {
+            Log.v("trendData", movie.toString())
 
-                viewModel.trendData.observe(viewLifecycleOwner) { movie ->
-
-                    Log.v("trendData", movie.toString())
-
-                    adapterTrending = TrendRecyclerView(movie, this@HomeFragment)
-                    binding.recyclerTrend.adapter = adapterTrending
-                    binding.loading.visibility = View.GONE
-
-                }
-
-            }
+            adapterTrending = TrendRecyclerView(movie, this@HomeFragment)
+            binding.recyclerTrend.adapter = adapterTrending
+            binding.loading.visibility = View.GONE
 
         }
 
@@ -137,18 +122,11 @@ class HomeFragment : Fragment(), NowPlayingRecyclerView.ItemEvent, PopularRecycl
     //Up coming data and set to recycler
     private fun upcoming() {
 
-        lifecycleScope.launch {
+        viewModel.upcomingData.observe(viewLifecycleOwner) { movie ->
 
-            lifecycle.repeatOnLifecycle(Lifecycle.State.CREATED) {
-
-                viewModel.upcomingData.observe(viewLifecycleOwner) { movie ->
-
-                    upcomingAdapter = UpcomingRecyclerView(movie, this@HomeFragment)
-                    binding.filmRecycler.adapter = upcomingAdapter
-                    binding.loading1.visibility = View.GONE
-                }
-            }
-
+            upcomingAdapter = UpcomingRecyclerView(movie, this@HomeFragment)
+            binding.filmRecycler.adapter = upcomingAdapter
+            binding.loading1.visibility = View.GONE
         }
 
     }
@@ -156,19 +134,11 @@ class HomeFragment : Fragment(), NowPlayingRecyclerView.ItemEvent, PopularRecycl
     //Top rate data and set to recycler
     private fun topRate() {
 
-        lifecycleScope.launch {
+        viewModel.topRatedData.observe(viewLifecycleOwner) { movie ->
 
-            lifecycle.repeatOnLifecycle(Lifecycle.State.CREATED) {
-
-                viewModel.topRatedData.observe(viewLifecycleOwner) { movie ->
-
-                    topRatedAdapter = TopRatedRecyclerView(movie, this@HomeFragment)
-                    binding.filmRecycler.adapter = topRatedAdapter
-                    binding.loading1.visibility = View.GONE
-
-                }
-
-            }
+            topRatedAdapter = TopRatedRecyclerView(movie, this@HomeFragment)
+            binding.filmRecycler.adapter = topRatedAdapter
+            binding.loading1.visibility = View.GONE
 
         }
 
@@ -177,20 +147,12 @@ class HomeFragment : Fragment(), NowPlayingRecyclerView.ItemEvent, PopularRecycl
     //Popular data and set to recycler
     private fun popularData() {
 
+        viewModel.popularData.observe(viewLifecycleOwner) { movie ->
 
-        lifecycleScope.launch {
-
-            lifecycle.repeatOnLifecycle(Lifecycle.State.CREATED) {
-
-                viewModel.popularData.observe(viewLifecycleOwner) { movie ->
-
-                    Log.v("dataTest", movie.toString())
-                    popularAdapter = PopularRecyclerView(movie, this@HomeFragment)
-                    binding.filmRecycler.adapter = popularAdapter
-                    binding.loading1.visibility = View.GONE
-                }
-            }
-
+            Log.v("dataTest", movie.toString())
+            popularAdapter = PopularRecyclerView(movie, this@HomeFragment)
+            binding.filmRecycler.adapter = popularAdapter
+            binding.loading1.visibility = View.GONE
         }
 
     }
@@ -198,22 +160,16 @@ class HomeFragment : Fragment(), NowPlayingRecyclerView.ItemEvent, PopularRecycl
     // Now playing data and set to recycler
     private fun nowPlayingData() {
 
-        lifecycleScope.launch {
+        viewModel.nowPlayingData.observe(viewLifecycleOwner) { movie ->
 
-            lifecycle.repeatOnLifecycle(Lifecycle.State.CREATED) {
+            nowPlayingAdapter = NowPlayingRecyclerView(movie, this@HomeFragment)
+            binding.filmRecycler.adapter = nowPlayingAdapter
+            binding.loading1.visibility = View.GONE
 
-                viewModel.nowPlayingData.observe(viewLifecycleOwner) { movie ->
-
-                    nowPlayingAdapter = NowPlayingRecyclerView(movie, this@HomeFragment)
-                    binding.filmRecycler.adapter = nowPlayingAdapter
-                    binding.loading1.visibility = View.GONE
-
-                }
-            }
         }
     }
 
-    // Send data to detail fragment bottom recycler
+    // Send data to detail fragment
     override fun onItemClick(result: List<NowPlayingEntity>, position: Int) {
 
         val bundle = Bundle()
@@ -232,8 +188,6 @@ class HomeFragment : Fragment(), NowPlayingRecyclerView.ItemEvent, PopularRecycl
 
     }
 
-
-    // Send data to detail fragment top recycler trend
     override fun onItemClickTrend(result: List<TrendEntity>, position: Int) {
 
         val bundle = Bundle()

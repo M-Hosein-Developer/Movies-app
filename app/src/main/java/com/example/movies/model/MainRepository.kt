@@ -3,6 +3,7 @@ package com.example.movies.model
 import android.util.Log
 import com.example.movies.model.apiService.ApiService
 import com.example.movies.model.apiService.ResponseMovies
+import com.example.movies.model.apiService.SearchResponse
 import com.example.movies.model.apiService.TrailerResponse
 import com.example.movies.model.dataClasses.NowPlayingEntity
 import com.example.movies.model.dataClasses.PopularEntity
@@ -173,9 +174,13 @@ class MainRepository @Inject constructor(private val apiService: ApiService, pri
     }
 
 
-    suspend fun getAllExplore(): ResponseMovies {
+    suspend fun getAllExplore(searchText : String ,pageNumber : Int): SearchResponse {
 
-        return apiService.getAllExplore()
+        val a = apiService.getAllExplore(searchText , false , "en-US" , pageNumber)
+
+        Log.v("testSearch" , a.results.toString())
+
+        return a
     }
 
     suspend fun getTrailerById(id : Int) : List<TrailerResponse.MoviesResult> {

@@ -4,6 +4,7 @@ import com.example.movies.utils.API_KEY
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface ApiService {
 
@@ -28,8 +29,11 @@ interface ApiService {
     suspend fun getAllTrend() : ResponseMovies
 
     @Headers(API_KEY)
-    @GET("3/trending/all/day?language=en-US")
-    suspend fun getAllExplore() : ResponseMovies
+    @GET("3/search/multi")
+    suspend fun getAllExplore(
+        @Query("query") query: String, @Query("include_adult") includeAdult: Boolean,
+        @Query("language") language: String, @Query("page") page: Int
+    ) : SearchResponse
 
     @Headers(API_KEY)
     @GET("3/movie/{id}/videos?language=en-US")

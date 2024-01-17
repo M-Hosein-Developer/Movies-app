@@ -6,22 +6,22 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.movies.databinding.ExploreItemRecBinding
-import com.example.movies.model.apiService.Result
+import com.example.movies.model.apiService.SearchResponse
 
 
-class ExploreAdapter(private val data : List<Result>, private val itemEventExplore: ItemEventExplore) : RecyclerView.Adapter<ExploreAdapter.ExploreAdapterHolder>() {
+class ExploreAdapter(private val data: List<SearchResponse.Result>, private val itemEventExplore: ItemEventExplore) : RecyclerView.Adapter<ExploreAdapter.ExploreAdapterHolder>() {
 
     lateinit var binding : ExploreItemRecBinding
 
     inner class ExploreAdapterHolder(view : View) : RecyclerView.ViewHolder(view){
-        fun bindView(result: Result) {
+        fun bindView(result: SearchResponse.Result) {
 
             binding.txtTitleExplore.text = data[adapterPosition].title
-            binding.txtRate.text = data[adapterPosition].voteAverage.toString()
-            binding.txtDate.text = data[adapterPosition].releaseDate
+            binding.txtRate.text = data[adapterPosition].vote_average.toString()
+            binding.txtDate.text = data[adapterPosition].release_date
 
             Glide.with(itemView)
-                .load("https://image.tmdb.org/t/p/w500" + data[adapterPosition].posterPath)
+                .load("https://image.tmdb.org/t/p/w500" + data[adapterPosition].poster_path)
                 .into(binding.imgCoverExplore)
 
 
@@ -49,6 +49,6 @@ class ExploreAdapter(private val data : List<Result>, private val itemEventExplo
 
     interface ItemEventExplore{
 
-        fun onItemClicked(result: List<Result>, position: Int)
+        fun onItemClicked(result: List<SearchResponse.Result>, position: Int)
     }
 }

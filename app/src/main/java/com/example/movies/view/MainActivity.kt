@@ -3,6 +3,7 @@ package com.example.movies.view
 
 import android.os.Bundle
 import android.view.View
+import android.view.animation.TranslateAnimation
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
@@ -62,7 +63,17 @@ class MainActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
 
-            if (destination.id == R.id.homeFragment) {
+            if (destination.id == R.id.homeFragment ||
+                destination.id == R.id.exploreFragment ||
+                destination.id == R.id.downloadFragment ||
+                destination.id == R.id.favoriteFragment ||
+                destination.id == R.id.profileFragment) {
+
+                val animBottom = TranslateAnimation(0f , 0f , 200f , +0f)
+                animBottom.duration = 1000
+
+                binding.bottomNavigation.startAnimation(animBottom)
+                binding.view.startAnimation(animBottom)
 
                 binding.bottomNavigation.visibility = View.VISIBLE
                 binding.toolbarMain.visibility = View.VISIBLE

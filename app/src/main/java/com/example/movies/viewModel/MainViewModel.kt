@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.movies.model.MainRepository
 import com.example.movies.model.apiService.ResponseMovies
+import com.example.movies.model.apiService.SearchResponse
 import com.example.movies.model.apiService.TrailerResponse
 import com.example.movies.model.dataClasses.NowPlayingEntity
 import com.example.movies.model.dataClasses.PopularEntity
@@ -111,8 +112,8 @@ class MainViewModel @Inject constructor(private val mainRepository: MainReposito
     }
 
 
-    suspend fun getAllExplore(): ResponseMovies {
-        return mainRepository.getAllExplore()
+    suspend fun getAllExplore(searchText : String ,pageNumber : Int): SearchResponse {
+        return mainRepository.getAllExplore(searchText , pageNumber)
     }
 
     suspend fun getTrailerById(id: Int): List<TrailerResponse.MoviesResult> {

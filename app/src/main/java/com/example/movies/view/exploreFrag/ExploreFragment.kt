@@ -1,10 +1,12 @@
 package com.example.movies.view.exploreFrag
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -13,8 +15,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movies.databinding.FragmentExploreBinding
 import com.example.movies.model.apiService.ApiService
+import com.example.movies.model.apiService.SearchResponse
 import com.example.movies.model.room.MoviesDao
-import com.example.movies.model.apiService.Result
 import com.example.movies.viewModel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -50,28 +52,46 @@ class ExploreFragment : Fragment() , ExploreAdapter.ItemEventExplore {
 
     private fun getAllData() {
 
-        lifecycleScope.launch {
 
-            lifecycle.repeatOnLifecycle(Lifecycle.State.CREATED) {
+        binding.txtSearch.addTextChangedListener(object : TextWatcher {
 
-                val data = viewModel.getAllExplore().results
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
-                adapter = ExploreAdapter(data , this@ExploreFragment)
-                binding.ExploreRecyclerview.adapter = adapter
-                binding.ExploreRecyclerview.layoutManager = LinearLayoutManager(context)
 
             }
 
-        }
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+                lifecycleScope.launch {
+                    lifecycle.repeatOnLifecycle(Lifecycle.State.CREATED) {
+
+                        val data = viewModel.getAllExplore(s.toString() , 3).results
+                        adapter = ExploreAdapter(data, this@ExploreFragment)
+                        binding.ExploreRecyclerview.adapter = adapter
+                        binding.ExploreRecyclerview.layoutManager = LinearLayoutManager(context)
+
+                    }
+                }
+
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+
+            }
+
+        })
 
     }
 
-    override fun onItemClicked(result: List<Result>, position: Int) {
+    override fun onItemClicked(result: List<SearchResponse.Result>, position: Int) {
+
         val bundle = Bundle()
-        bundle.putString("background", result[position].backdropPath)
-        bundle.putString("poster", result[position].posterPath)
+        bundle.putInt("id", result[position].id)
+        bundle.putString("background", result[position].backdrop_path)
+        bundle.putString("poster", result[position].poster_path)
         bundle.putString("title", result[position].title)
-        bundle.putString("date", result[position].releaseDate)
+        bundle.putString("date", result[position].release_date)
         bundle.putString("about", result[position].overview)
 
         findNavController().navigate(com.example.movies.R.id.action_exploreFragment_to_detailFragment , bundle)

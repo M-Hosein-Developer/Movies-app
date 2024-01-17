@@ -6,18 +6,44 @@
     android:layout_height="match_parent"
     tools:context=".view.exploreFrag.ExploreFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/ExploreRecyclerview"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layoutAnimation="@anim/recycler"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"
+        android:textColorHint="@color/blue"
+        app:endIconDrawable="@drawable/search"
+        app:endIconMode="custom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtSearch"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Search"
+            android:maxLines="1"
+            android:background="#242B3C"
+            android:textColor="@color/white" />
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/ExploreRecyclerview"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layoutAnimation="@anim/recycler"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
         tools:listitem="@layout/explore_item_rec" />
 </androidx.constraintlayout.widget.ConstraintLayout>
