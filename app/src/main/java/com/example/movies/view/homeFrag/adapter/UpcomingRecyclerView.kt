@@ -20,13 +20,13 @@ class UpcomingRecyclerView(private val data: List<UpcomingEntity>?, val itemEven
 
 
             Glide.with(itemView)
-                .load("https://image.tmdb.org/t/p/w500" + data!![adapterPosition].posterPath)
+                .load("https://image.tmdb.org/t/p/w500" + moviesList.posterPath)
                 .into(binding.imgCover)
 
 
             itemView.setOnClickListener {
 
-                itemEventPopular.onItemClickUpcoming(data , adapterPosition)
+                itemEventPopular.onItemClickUpcoming(moviesList)
 
             }
 
@@ -50,7 +50,7 @@ class UpcomingRecyclerView(private val data: List<UpcomingEntity>?, val itemEven
 
 
     interface ItemEvent {
-        fun onItemClickUpcoming(result: List<UpcomingEntity>, position: Int)
+        fun onItemClickUpcoming(result: UpcomingEntity)
     }
 
 

@@ -16,9 +16,9 @@ class ExploreAdapter(private val data: List<SearchResponse.Result>, private val 
     inner class ExploreAdapterHolder(view : View) : RecyclerView.ViewHolder(view){
         fun bindView(result: SearchResponse.Result) {
 
-            binding.txtTitleExplore.text = data[adapterPosition].title
-            binding.txtRate.text = data[adapterPosition].vote_average.toString()
-            binding.txtDate.text = data[adapterPosition].release_date
+            binding.txtTitleExplore.text = result.title
+            binding.txtRate.text = result.vote_average.toString()
+            binding.txtDate.text = result.release_date
 
             Glide.with(itemView)
                 .load("https://image.tmdb.org/t/p/w500" + data[adapterPosition].poster_path)

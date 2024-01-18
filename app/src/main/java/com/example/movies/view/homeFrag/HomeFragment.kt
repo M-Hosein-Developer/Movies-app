@@ -31,15 +31,15 @@ class HomeFragment : Fragment(), NowPlayingRecyclerView.ItemEvent, PopularRecycl
     //Binding
     lateinit var binding: FragmentHomeBinding
 
-    //Other
+    //adapter
     private lateinit var nowPlayingAdapter: NowPlayingRecyclerView
     private lateinit var popularAdapter: PopularRecyclerView
     private lateinit var topRatedAdapter: TopRatedRecyclerView
     private lateinit var upcomingAdapter: UpcomingRecyclerView
     private lateinit var adapterTrending: TrendRecyclerView
 
+    //view model
     private val viewModel: MainViewModel by viewModels()
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
@@ -170,15 +170,15 @@ class HomeFragment : Fragment(), NowPlayingRecyclerView.ItemEvent, PopularRecycl
     }
 
     // Send data to detail fragment
-    override fun onItemClick(result: List<NowPlayingEntity>, position: Int) {
+    override fun onItemClick(result: NowPlayingEntity) {
 
         val bundle = Bundle()
-        bundle.putInt("id", result[position].id)
-        bundle.putString("background", result[position].backdropPath)
-        bundle.putString("poster", result[position].posterPath)
-        bundle.putString("title", result[position].title)
-        bundle.putString("date", result[position].releaseDate)
-        bundle.putString("about", result[position].overview)
+        bundle.putInt("id", result.id)
+        bundle.putString("background", result.backdropPath)
+        bundle.putString("poster", result.posterPath)
+        bundle.putString("title", result.title)
+        bundle.putString("date", result.releaseDate)
+        bundle.putString("about", result.overview)
 
         findNavController().navigate(
             com.example.movies.R.id.action_homeFragment_to_detailFragment,
@@ -188,15 +188,15 @@ class HomeFragment : Fragment(), NowPlayingRecyclerView.ItemEvent, PopularRecycl
 
     }
 
-    override fun onItemClickTrend(result: List<TrendEntity>, position: Int) {
+    override fun onItemClickTrend(result: TrendEntity) {
 
         val bundle = Bundle()
-        bundle.putInt("id", result[position].id)
-        bundle.putString("background", result[position].backdropPath)
-        bundle.putString("poster", result[position].posterPath)
-        bundle.putString("title", result[position].title)
-        bundle.putString("date", result[position].releaseDate)
-        bundle.putString("about", result[position].overview)
+        bundle.putInt("id", result.id)
+        bundle.putString("background", result.backdropPath)
+        bundle.putString("poster", result.posterPath)
+        bundle.putString("title", result.title)
+        bundle.putString("date", result.releaseDate)
+        bundle.putString("about", result.overview)
 
         findNavController().navigate(
             com.example.movies.R.id.action_homeFragment_to_detailFragment,
@@ -205,15 +205,15 @@ class HomeFragment : Fragment(), NowPlayingRecyclerView.ItemEvent, PopularRecycl
 
     }
 
-    override fun onItemClickPopular(result: List<PopularEntity>, position: Int) {
+    override fun onItemClickPopular(result: PopularEntity) {
 
         val bundle = Bundle()
-        bundle.putInt("id", result[position].id)
-        bundle.putString("background", result[position].backdropPath)
-        bundle.putString("poster", result[position].posterPath)
-        bundle.putString("title", result[position].title)
-        bundle.putString("date", result[position].releaseDate)
-        bundle.putString("about", result[position].overview)
+        bundle.putInt("id", result.id)
+        bundle.putString("background", result.backdropPath)
+        bundle.putString("poster", result.posterPath)
+        bundle.putString("title", result.title)
+        bundle.putString("date", result.releaseDate)
+        bundle.putString("about", result.overview)
 
         findNavController().navigate(
             com.example.movies.R.id.action_homeFragment_to_detailFragment,
@@ -222,15 +222,15 @@ class HomeFragment : Fragment(), NowPlayingRecyclerView.ItemEvent, PopularRecycl
 
     }
 
-    override fun onItemClickTopRated(result: List<TopRatedEntity>, position: Int) {
+    override fun onItemClickTopRated(result: TopRatedEntity) {
 
         val bundle = Bundle()
-        bundle.putInt("id", result[position].id)
-        bundle.putString("background", result[position].backdropPath)
-        bundle.putString("poster", result[position].posterPath)
-        bundle.putString("title", result[position].title)
-        bundle.putString("date", result[position].releaseDate)
-        bundle.putString("about", result[position].overview)
+        bundle.putInt("id", result.id)
+        bundle.putString("background", result.backdropPath)
+        bundle.putString("poster", result.posterPath)
+        bundle.putString("title", result.title)
+        bundle.putString("date", result.releaseDate)
+        bundle.putString("about", result.overview)
 
         findNavController().navigate(
             com.example.movies.R.id.action_homeFragment_to_detailFragment,
@@ -239,15 +239,15 @@ class HomeFragment : Fragment(), NowPlayingRecyclerView.ItemEvent, PopularRecycl
 
     }
 
-    override fun onItemClickUpcoming(result: List<UpcomingEntity>, position: Int) {
+    override fun onItemClickUpcoming(result: UpcomingEntity) {
 
         val bundle = Bundle()
-        bundle.putInt("id", result[position].id)
-        bundle.putString("background", result[position].backdropPath)
-        bundle.putString("poster", result[position].posterPath)
-        bundle.putString("title", result[position].title)
-        bundle.putString("date", result[position].releaseDate)
-        bundle.putString("about", result[position].overview)
+        bundle.putInt("id", result.id)
+        bundle.putString("background", result.backdropPath)
+        bundle.putString("poster", result.posterPath)
+        bundle.putString("title", result.title)
+        bundle.putString("date", result.releaseDate)
+        bundle.putString("about", result.overview)
 
         findNavController().navigate(
             com.example.movies.R.id.action_homeFragment_to_detailFragment,

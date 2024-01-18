@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -25,17 +26,17 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class ExploreFragment : Fragment() , ExploreAdapter.ItemEventExplore {
 
+    //binding
     lateinit var binding : FragmentExploreBinding
-    lateinit var viewModel: MainViewModel
+
+    //view model
+    val viewModel: MainViewModel by viewModels()
+
     lateinit var adapter: ExploreAdapter
+    @Inject lateinit var apiService: ApiService
+    @Inject lateinit var roomDao : MoviesDao
 
-    @Inject
-    lateinit var apiService: ApiService
-
-    @Inject
-    lateinit var roomDao : MoviesDao
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentExploreBinding.inflate(layoutInflater , container , false)
 
         return binding.root
@@ -44,16 +45,13 @@ class ExploreFragment : Fragment() , ExploreAdapter.ItemEventExplore {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
-
         getAllData()
 
     }
 
     private fun getAllData() {
 
-
-
+        //search box
         binding.txtSearch.addTextChangedListener(object : TextWatcher {
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -66,6 +64,7 @@ class ExploreFragment : Fragment() , ExploreAdapter.ItemEventExplore {
                 lifecycleScope.launch {
                     lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
 
+                        //get data
                         val data = viewModel.getAllExplore(s.toString() , 3).results
                         adapter = ExploreAdapter(data, this@ExploreFragment)
                         binding.ExploreRecyclerview.adapter = adapter
@@ -86,6 +85,7 @@ class ExploreFragment : Fragment() , ExploreAdapter.ItemEventExplore {
 
     }
 
+    //send data
     override fun onItemClicked(result: List<SearchResponse.Result>, position: Int) {
 
         val bundle = Bundle()

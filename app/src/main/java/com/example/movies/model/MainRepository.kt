@@ -17,6 +17,7 @@ class MainRepository @Inject constructor(private val apiService: ApiService, pri
 
     //get data from db
 
+    //Now play
     suspend fun getAllNowPlay(): List<NowPlayingEntity> {
 
         val response = apiService.getAllNowPlay()
@@ -47,6 +48,7 @@ class MainRepository @Inject constructor(private val apiService: ApiService, pri
         return moviesDao.getAllNowPlayingData()
     }
 
+    //Popular
    suspend fun getAllPopular(): List<PopularEntity> {
 
         val response = apiService.getAllPopular()
@@ -77,6 +79,7 @@ class MainRepository @Inject constructor(private val apiService: ApiService, pri
         return moviesDao.getAllPopularData()
     }
 
+    //Top rate
     suspend fun getAllTopRate(): List<TopRatedEntity> {
 
         val response = apiService.getAllTopRate()
@@ -107,6 +110,7 @@ class MainRepository @Inject constructor(private val apiService: ApiService, pri
         return moviesDao.getAllTopRatedData()
     }
 
+    //Upcoming
      suspend fun getAllUpcoming(): List<UpcomingEntity> {
 
         val response = apiService.getAllUpcoming()
@@ -138,6 +142,7 @@ class MainRepository @Inject constructor(private val apiService: ApiService, pri
 
     }
 
+    //All trend
     suspend fun getAllTrend(): List<TrendEntity> {
 
         val response = apiService.getAllTrend()
@@ -173,7 +178,7 @@ class MainRepository @Inject constructor(private val apiService: ApiService, pri
 
     }
 
-
+    //Explore
     suspend fun getAllExplore(searchText : String ,pageNumber : Int): SearchResponse {
 
         val a = apiService.getAllExplore(searchText , false , "en-US" , pageNumber)
@@ -183,6 +188,7 @@ class MainRepository @Inject constructor(private val apiService: ApiService, pri
         return a
     }
 
+    //Trailer
     suspend fun getTrailerById(id : Int) : List<TrailerResponse.MoviesResult> {
         return apiService.getTrailerById(id).results
     }

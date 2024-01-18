@@ -20,13 +20,13 @@ class PopularRecyclerView(private val data: List<PopularEntity>?, val itemEventP
 
 
             Glide.with(itemView)
-                .load("https://image.tmdb.org/t/p/w500" + data!![adapterPosition].posterPath)
+                .load("https://image.tmdb.org/t/p/w500" + moviesList.posterPath)
                 .into(binding.imgCover)
 
 
             itemView.setOnClickListener {
 
-                itemEventPopular.onItemClickPopular(data , adapterPosition)
+                itemEventPopular.onItemClickPopular(moviesList)
 
             }
 
@@ -50,7 +50,7 @@ class PopularRecyclerView(private val data: List<PopularEntity>?, val itemEventP
 
 
     interface ItemEvent {
-        fun onItemClickPopular(result: List<PopularEntity>, position: Int)
+        fun onItemClickPopular(result: PopularEntity)
     }
 
 

@@ -17,12 +17,12 @@ class TrendRecyclerView(private val data: List<TrendEntity>?, private val itemEv
         fun bindView(moviesList: TrendEntity) {
 
             Glide.with(itemView)
-                .load("https://image.tmdb.org/t/p/w500" + data!![adapterPosition].posterPath)
+                .load("https://image.tmdb.org/t/p/w500" + moviesList.posterPath)
                 .into(binding.imgCover)
 
             itemView.setOnClickListener {
 
-                itemEvent.onItemClickTrend(data , adapterPosition)
+                itemEvent.onItemClickTrend(moviesList)
 
             }
 
@@ -46,7 +46,7 @@ class TrendRecyclerView(private val data: List<TrendEntity>?, private val itemEv
 
     interface EventItem {
 
-        fun onItemClickTrend(result : List<TrendEntity>, position: Int)
+        fun onItemClickTrend(result: TrendEntity)
 
     }
 

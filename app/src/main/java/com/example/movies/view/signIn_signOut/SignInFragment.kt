@@ -21,7 +21,7 @@ class SignInFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
        binding = FragmentSignInBinding.inflate(layoutInflater , container ,false)
         return binding.root
     }

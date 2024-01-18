@@ -20,13 +20,13 @@ class TopRatedRecyclerView(private val data: List<TopRatedEntity>?, val itemEven
 
 
             Glide.with(itemView)
-                .load("https://image.tmdb.org/t/p/w500" + data!![adapterPosition].posterPath)
+                .load("https://image.tmdb.org/t/p/w500" + moviesList.posterPath)
                 .into(binding.imgCover)
 
 
             itemView.setOnClickListener {
 
-                itemEvent.onItemClickTopRated(data , adapterPosition)
+                itemEvent.onItemClickTopRated(moviesList)
 
             }
 
@@ -50,7 +50,7 @@ class TopRatedRecyclerView(private val data: List<TopRatedEntity>?, val itemEven
 
 
     interface ItemEvent {
-        fun onItemClickTopRated(result: List<TopRatedEntity>, position: Int)
+        fun onItemClickTopRated(result: TopRatedEntity)
     }
 
 

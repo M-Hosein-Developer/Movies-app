@@ -20,13 +20,13 @@ class NowPlayingRecyclerView(private val data: List<NowPlayingEntity>?, val item
 
 
             Glide.with(itemView)
-                .load("https://image.tmdb.org/t/p/w500" + data!![adapterPosition].posterPath)
+                .load("https://image.tmdb.org/t/p/w500" + moviesList.posterPath)
                 .into(binding.imgCover)
 
 
             itemView.setOnClickListener {
 
-                itemEvent.onItemClick(data , adapterPosition)
+                itemEvent.onItemClick(moviesList)
 
             }
 
@@ -50,7 +50,7 @@ class NowPlayingRecyclerView(private val data: List<NowPlayingEntity>?, val item
 
 
     interface ItemEvent {
-        fun onItemClick(result: List<NowPlayingEntity>, position: Int)
+        fun onItemClick(result: NowPlayingEntity)
     }
 
 
